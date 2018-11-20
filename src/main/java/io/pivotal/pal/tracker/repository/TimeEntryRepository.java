@@ -5,10 +5,10 @@ import io.pivotal.pal.tracker.pojo.TimeEntry;
 import java.util.List;
 
 public interface TimeEntryRepository {
-void delete(long id);
+void delete(Long id);
 TimeEntry create(TimeEntry timeEntry);
-TimeEntry find(long id);
+TimeEntry find(Long id);
 List<TimeEntry> list();
-TimeEntry update(long id, TimeEntry timeEntryupdated);
+TimeEntry update(Long id, TimeEntry timeEntryupdated);
 
 }

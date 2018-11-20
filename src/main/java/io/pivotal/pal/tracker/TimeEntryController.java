@@ -13,7 +13,6 @@ import java.util.List;
 @RequestMapping("/time-entries")
 public class TimeEntryController {
 
-
     private TimeEntryRepository timeEntryRepository;
    public  TimeEntryController(TimeEntryRepository timeEntryRepository){
         this.timeEntryRepository=timeEntryRepository;
@@ -21,17 +20,17 @@ public class TimeEntryController {
 
 
     @PostMapping
-    public ResponseEntity create(@RequestParam TimeEntry timeEntry){
+    public ResponseEntity create(@RequestBody TimeEntry timeEntry){
        TimeEntry timeentryCreated= timeEntryRepository.create(timeEntry);
        return new ResponseEntity(timeentryCreated,HttpStatus.CREATED);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity read(@PathVariable long id){
+    public ResponseEntity read(@PathVariable Long id){
         TimeEntry timeEntryRead= timeEntryRepository.find(id);
         if(timeEntryRead==null)
         {
-            return new ResponseEntity(timeEntryRead,HttpStatus.NOT_FOUND);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
         else {
             return new ResponseEntity(timeEntryRead, HttpStatus.OK);
@@ -44,11 +43,11 @@ public class TimeEntryController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity update(@PathVariable long id,@RequestBody TimeEntry timeEntry){
+    public ResponseEntity update(@PathVariable Long id,@RequestBody TimeEntry timeEntry){
         TimeEntry timeEntryupdate= timeEntryRepository.update(id, timeEntry);
         if(timeEntryupdate==null)
         {
-            return new ResponseEntity(timeEntryupdate,HttpStatus.NOT_FOUND);
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
         else {
             return new ResponseEntity(timeEntryupdate, HttpStatus.OK);
@@ -57,7 +56,7 @@ public class TimeEntryController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity delete(@PathVariable long timeEntryId){
+    public ResponseEntity delete(@PathVariable Long timeEntryId){
          timeEntryRepository.delete(timeEntryId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }

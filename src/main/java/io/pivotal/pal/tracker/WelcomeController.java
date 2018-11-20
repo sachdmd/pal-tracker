@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class WelcomeController {
 
 
+
     private String sayHello;
 
-   // @Autowired
     public WelcomeController(@Value("${welcome.message}") String sayHello){
         this.sayHello=sayHello;
 
     }
     @GetMapping("/")
     public String sayHello() {
-        return sayHello;
+        return this.sayHello;
     }
 }
 

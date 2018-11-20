@@ -1,6 +1,7 @@
 package io.pivotal.pal.tracker.repository;
 
 import io.pivotal.pal.tracker.pojo.TimeEntry;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,19 +25,17 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository{
          return this.timeEntry;
     }
 
-    public TimeEntry find(long id){
+    public TimeEntry find(Long id){
 
-        if(timeEntryMap.containsKey(id)){
-            return timeEntryMap.get(id);
-        }
-        return null;
+       return timeEntryMap.get(id);
+
     }
 
     public List<TimeEntry> list(){
        return timeEntryMap.values().stream().collect(Collectors.toList());
     }
 
-    public TimeEntry update(long id, TimeEntry timeEntryupdated){
+    public TimeEntry update(Long id, TimeEntry timeEntryupdated){
         if(timeEntryMap.containsKey(id)){
             timeEntryupdated.setId(id);
             timeEntryMap.put(id,timeEntryupdated);
@@ -44,10 +43,9 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository{
         return timeEntryMap.get(id);
     }
 
-    public void delete(long id){
-        if(timeEntryMap.containsKey(id)){
+    public void delete(Long id){
             timeEntryMap.remove(id);
-        }
+
     }
 
 

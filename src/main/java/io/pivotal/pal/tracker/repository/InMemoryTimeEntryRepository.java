@@ -1,52 +1,60 @@
 package io.pivotal.pal.tracker.repository;
 
 import io.pivotal.pal.tracker.pojo.TimeEntry;
-import org.springframework.stereotype.Repository;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-public class InMemoryTimeEntryRepository implements TimeEntryRepository{
+public class InMemoryTimeEntryRepository implements TimeEntryRepository {
+    private HashMap<Long, TimeEntry> timeEntries = new HashMap<>();
 
-    private TimeEntry timeEntry;
-    private Map<Long,TimeEntry> timeEntryMap= new HashMap();
-    private long id=0;
+    private long currentId = 1L;
 
-    public TimeEntry create(TimeEntry timeEntry){
-        this.timeEntry=timeEntry;
-        if(timeEntry.getId()!=null) {
-            timeEntryMap.put(timeEntry.getId(),timeEntry);
-        }
-        else{
-            id=id+1;
-            this.timeEntry.setId(id);
-            timeEntryMap.put(id,timeEntry);
-        }
-         return this.timeEntry;
+    @Override
+    public TimeEntry create(TimeEntry timeEntry) {
+        Long id = currentId++;
+
+        TimeEntry newTimeEntry = new TimeEntry(
+                id,
+                timeEntry.getProjectId(),
+                timeEntry.getUserId(),
+                timeEntry.getDate(),
+                timeEntry.getHours()
+        );
+
+        timeEntries.put(id, newTimeEntry);
+        return newTimeEntry;
     }
 
-    public TimeEntry find(Long id){
-
-       return timeEntryMap.get(id);
-
+    @Override
+    public TimeEntry find(Long id) {
+        return timeEntries.get(id);
     }
 
-    public List<TimeEntry> list(){
-       return timeEntryMap.values().stream().collect(Collectors.toList());
+    @Override
+    public List<TimeEntry> list() {
+        return new ArrayList<>(timeEntries.values());
     }
 
-    public TimeEntry update(Long id, TimeEntry timeEntryupdated){
-        if(timeEntryMap.containsKey(id)){
-            timeEntryupdated.setId(id);
-            timeEntryMap.put(id,timeEntryupdated);
-        }
-        return timeEntryMap.get(id);
+    @Override
+    public TimeEntry update(Long id, TimeEntry timeEntry) {
+        if (find(id) == null) return null;
+
+        TimeEntry updatedEntry = new TimeEntry(
+                id,
+                timeEntry.getProjectId(),
+                timeEntry.getUserId(),
+                timeEntry.getDate(),
+                timeEntry.getHours()
+        );
+
+        timeEntries.replace(id, updatedEntry);
+        return updatedEntry;
     }
 
-    public void delete(Long id){
-            timeEntryMap.remove(id);
-
+    @Override
+    public void delete(Long id) {
+        timeEntries.remove(id);
     }
-
-
 }

@@ -2,9 +2,9 @@ package test.pivotal.pal.tracker;
 
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-import io.pivotal.pal.tracker.JdbcTimeEntryRepository;
-import io.pivotal.pal.tracker.TimeEntry;
-import io.pivotal.pal.tracker.TimeEntryRepository;
+import io.pivotal.pal.tracker.pojo.TimeEntry;
+import io.pivotal.pal.tracker.repository.JdbcTimeEntryRepository;
+import io.pivotal.pal.tracker.repository.TimeEntryRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,6 +23,7 @@ public class JdbcTimeEntryRepositoryTest {
 
     @Before
     public void setUp() {
+
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setUrl(System.getenv("SPRING_DATASOURCE_URL"));
 

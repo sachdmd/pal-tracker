@@ -1,7 +1,10 @@
 package io.pivotal.pal.tracker.pojo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.time.LocalDate;
 
+@JsonSerialize
 public class TimeEntry {
     private Long id;
     private Long projectId;

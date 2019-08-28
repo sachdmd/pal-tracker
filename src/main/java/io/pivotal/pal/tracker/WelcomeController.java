@@ -1,4 +1,4 @@
-package io.pivotal.pal.tracker.controller;
+package io.pivotal.pal.tracker;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +11,7 @@ public class WelcomeController {
 
     private String sayHello;
 
-    @Autowired
+   // @Autowired
     public WelcomeController(@Value("${welcome.message}") String sayHello){
         this.sayHello=sayHello;
 

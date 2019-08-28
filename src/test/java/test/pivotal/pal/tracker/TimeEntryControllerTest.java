@@ -1,7 +1,7 @@
 package test.pivotal.pal.tracker;
 
 import io.pivotal.pal.tracker.pojo.TimeEntry;
-import io.pivotal.pal.tracker.controller.TimeEntryController;
+import io.pivotal.pal.tracker.TimeEntryController;
 import io.pivotal.pal.tracker.repository.TimeEntryRepository;
 import org.junit.Before;
 import org.junit.Test;

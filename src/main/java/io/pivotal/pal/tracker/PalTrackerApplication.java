@@ -1,6 +1,7 @@
 package io.pivotal.pal.tracker;
 
 import io.pivotal.pal.tracker.repository.InMemoryTimeEntryRepository;
+import io.pivotal.pal.tracker.repository.JdbcTimeEntryRepository;
 import io.pivotal.pal.tracker.repository.TimeEntryRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,8 +15,8 @@ public class PalTrackerApplication {
         SpringApplication.run(PalTrackerApplication.class, args);
     }
 
-    @Bean
+    /*@Bean
     TimeEntryRepository timeEntryRepository() {
-        return new InMemoryTimeEntryRepository();
-    }
+        return new JdbcTimeEntryRepository();
+    }*/
 }

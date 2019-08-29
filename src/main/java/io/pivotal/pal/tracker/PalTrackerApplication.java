@@ -15,8 +15,4 @@ public class PalTrackerApplication {
         SpringApplication.run(PalTrackerApplication.class, args);
     }
 
-    /*@Bean
-    TimeEntryRepository timeEntryRepository() {
-        return new JdbcTimeEntryRepository();
-    }*/
 }
